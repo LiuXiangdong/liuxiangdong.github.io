@@ -239,6 +239,137 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/LiuXiangdong/2019/11/24/android-launcher/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liuxd">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="空谈误国 实干兴邦">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/24/android-launcher/" itemprop="url">安卓启动器图标</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-24T23:10:13+08:00">
+                2019-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="安卓启动器图标"><a href="#安卓启动器图标" class="headerlink" title="安卓启动器图标"></a>安卓启动器图标</h1><h2 id="历史"><a href="#历史" class="headerlink" title="历史"></a>历史</h2><p>安卓启动器图标在混沌之初是百花齐放的，各家APP公司都会设计出形状各异的启动器图标，而安卓规范中也没有对启动器图标的约束。后来，谷歌的设计师认为当所有的东西都是特立独行的，就会使人感觉没有任何的东西是独特的。所以，随着安卓版本的发行以及材料设计的提出，谷歌推出了一些针对启动器图标的限制。<br><img src="/2019/11/24/android-launcher/overview.png"><br>在Android N（API 25）之前，启动器图标是形状各异的，如下图<br><img src="/2019/11/24/android-launcher/ic_launcher_pre_25.png"><br>在Android N（API 25）中，提出了<a href="https://developer.android.google.cn/about/versions/nougat/android-7.1#circular-icons" target="_blank" rel="noopener">圆形图标</a>的规范，这样安卓启动器的图标就会有统一的外形。在Android N（API 25）设备上，启动器图标大多数是呈现圆形的，如下图<br><img src="/2019/11/24/android-launcher/ic_launcher_25.png"><br>而在Android O（API 26）的版本中，又提出了<a href="https://developer.android.google.cn/guide/practices/ui_guidelines/icon_design_adaptive" target="_blank" rel="noopener">自适应图标</a>，这个规范使得启动器图标的样式更加灵活，外形不单单只能是圆形，可以根据需要将图标裁至任何形状。如下系列图所示，自适应图标可呈现出不同的外形<br><img src="/2019/11/24/android-launcher/ic_launcher_post_26_circle.png"><br><img src="/2019/11/24/android-launcher/ic_launcher_post_26_square.png"><br><img src="/2019/11/24/android-launcher/ic_launcher_post_26_teardrop.png"><br><img src="/2019/11/24/android-launcher/ic_launcher_post_26_squircle.png"><br><img src="/2019/11/24/android-launcher/ic_launcher_post_26_rounded_rectangle.png"><br>除此之外，自适应图标还能够呈现出一种联动的效果。具体是如何做到的呢？<br><img src="/2019/11/24/android-launcher/adaptive-icon.gif"><br>如上图所示，自适应图标不单单只是一张图片，而是包含了两个图层，一个前景图层，一个背景图层，背景图层要求必须是不透明的。最后OEM厂商会根据自己的需要在上方绘制一个形状蒙层，就会产生最终的效果。</p>
+<h2 id="APP需要的启动器图标"><a href="#APP需要的启动器图标" class="headerlink" title="APP需要的启动器图标"></a>APP需要的启动器图标</h2><p>如果应用的targetSdkVersion在26及以上，那么开发者在启动器图标上需要做的工作为<br>准备mdpi、hdpi、xhdpi、xxhdpi、xxxhdpi像素密度所需的图标素材，标准长宽为48dp × 48dp，即长宽为48px × 48px、72px × 72px、96px × 96px、144px × 144px、192px × 192px大小的普通图标和圆形图标共十份素材。<br><img src="/2019/11/24/android-launcher/ic_launcher_spec.png"><br>并将其放入对应的mipmap文件夹中，如果普通图标名称为ic_launcher，圆形图标名称为ic_launcher_round，接下来需要在AndroidManifest.xml文件中的application节点为相应的属性赋值，如下<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">application</span></span></span><br><span class="line"><span class="tag">        <span class="attr">...</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:icon</span>=<span class="string">"@mipmap/ic_launcher"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:roundIcon</span>=<span class="string">"@mipmap/ic_launcher_round"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">...</span>&gt;</span></span><br><span class="line">        ...</span><br><span class="line">		...</span><br><span class="line"><span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>接下来为应用添加自适应图标。首先需要创建两个图层，分别为108dp × 108dp的背景图层和108dp × 108dp的前景图层<br><img src="/2019/11/24/android-launcher/adaptive-spec.png"><br>如果背景图层名称为ic_launcher_background，前景图层为ic_launcher_foreground，则在mipmap-anydpi-v26下创建名为ic_launcher和ic_launcher_round（对应上述创建的普通图标和圆形图标的名称）的文件，内容为<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">adaptive-icon</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">background</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/ic_launcher_background"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">foreground</span> <span class="attr">android:drawable</span>=<span class="string">"@drawable/ic_launcher_foreground"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">adaptive-icon</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>自适应图标的普通版和圆形版可内容相同，需注意的是如果未提供自适应图标的圆形版，则在Android O以上机型上如果OEM创建的是圆形蒙版的图标，则会使用非自适应的圆形图标（即上述中的五个图标之一），其他情况下则会裁剪普通自适应图标。<br>另外，上述所有图标的创建均可参考Android Studio创建工程时为应用创建的默认图标。且通过Android Studio提供的工具快速创建旧版和自适应图标<br><img src="/2019/11/24/android-launcher/android_studio_1.png"><br><img src="/2019/11/24/android-launcher/android_studio_2.png"></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>自适应图标可呈现动画效果，但先大多数OEM厂商并没有使用此功能，如果希望查看自适应图标的动画效果可使用Nick Butcher开发的<a href="https://github.com/nickbutcher/AdaptiveIconPlayground/releases">AdaptiveIconPlayground</a>应用查看，GitHub地址为<a href="https://github.com/nickbutcher/AdaptiveIconPlayground">https://github.com/nickbutcher/AdaptiveIconPlayground</a><br><img src="/2019/11/24/android-launcher/adaptive-icon-playground.gif"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://developer.android.google.cn/about/versions/nougat/android-7.1#circular-icons" target="_blank" rel="noopener">https://developer.android.google.cn/about/versions/nougat/android-7.1#circular-icons</a></li>
+<li><a href="https://developer.android.google.cn/guide/practices/ui_guidelines/icon_design_adaptive" target="_blank" rel="noopener">https://developer.android.google.cn/guide/practices/ui_guidelines/icon_design_adaptive</a></li>
+<li><a href="https://material.io/design/iconography/#" target="_blank" rel="noopener">https://material.io/design/iconography/#</a></li>
+<li><a href="https://medium.com/google-design/understanding-android-adaptive-icons-cee8a9de93e2" target="_blank" rel="noopener">https://medium.com/google-design/understanding-android-adaptive-icons-cee8a9de93e2</a></li>
+<li><a href="https://medium.com/google-design/designing-adaptive-icons-515af294c783" target="_blank" rel="noopener">https://medium.com/google-design/designing-adaptive-icons-515af294c783</a></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/LiuXiangdong/2018/04/17/okhttp-cache-02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -311,7 +442,7 @@
         
           
             <blockquote>
-<p>这篇文章是基于3.10.0版本的<a href="https://github.com/square/okhttp">OkHttp</a>缓存在Android系统上的使用分析，如有错误或不恰当的地方，真诚希望大家指出。</p>
+<p>这篇文章是基于3.10.0版本的<a href="https://github.com/square/okhttp">OkHttp</a>缓存在Android系统上的使用分析，如有错误或不恰当的地方，真诚希望大家指出</p>
 </blockquote>
 <blockquote>
 <p>这篇文章详述了CacheStrategy的功能，此类大部分的逻辑可参考<a href="https://tools.ietf.org/html/rfc7234" target="_blank" rel="noopener">RFC7234</a>、<a href="https://tools.ietf.org/html/rfc2616#section-13" target="_blank" rel="noopener">RFC2616的缓存部分</a>和<a href="https://tools.ietf.org/html/rfc8246" target="_blank" rel="noopener">RFC8246</a>，也就是说此类是对于协议标准的实现，不涉及文件操作等底层细节，这篇文章的目的不在于教学，只是希望与大家一起探讨，因为毕竟我也有一些疑惑的地方</p>
@@ -402,7 +533,7 @@
 <blockquote>
 <p>Clients SHOULD NOT issue a conditional request during the response’s freshness lifetime (e.g., upon a reload) unless explicitly overridden by the user (e.g., a force reload).</p>
 </blockquote>
-<p>在分析<strong>出入</strong>之前，还需要了解一下上句中<strong>reload</strong>和<strong>force reload</strong>到底是什么意思。RFC也没有具体说，这里我参考了Firefox和Chrome的行为。在Firefox和Chrome中，如果按F5是一个刷新操作，着我们都知道，而在这两个浏览器中按Ctrl+F5是一个强制刷新操作。<br>我们来看一下当进行这两个操作的时候两个浏览器发送的请求有什么不同：<br>我们分别在两个浏览器中请求<a href="http://www.firefox.com.cn/media/img/logos/firefox/logo-quantum.9c5e96634f92.png" target="_blank" rel="noopener">http://www.firefox.com.cn/media/img/logos/firefox/logo-quantum.9c5e96634f92.png</a>这个url的图片，然后两个浏览器会将此响应保存<br>在缓存中，然后在Chrome中按F5刷新，请求首部如下所示：</p>
+<p>在分析<strong>出入</strong>之前，还需要了解一下上句中<strong>reload</strong>和<strong>force reload</strong>到底是什么意思。RFC也没有具体说，这里我参考了Firefox和Chrome的行为。在Firefox和Chrome中，如果按F5是一个刷新操作，着我们都知道，而在这两个浏览器中按Ctrl+F5是一个强制刷新操作。<br>我们来看一下当进行这两个操作的时候两个浏览器发送的请求有什么不同：<br>我们分别在两个浏览器中请求<a href="http://www.firefox.com.cn/media/img/logos/firefox/logo-quantum.9c5e96634f92.png" target="_blank" rel="noopener">http://www.firefox.com.cn/media/img/logos/firefox/logo-quantum.9c5e96634f92.png</a>这个url的图片，然后两个浏览器会将此响应保存在缓存中，然后在Chrome中按F5刷新，请求首部如下所示：</p>
 <blockquote>
 <p>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,<em>/</em>;q=0.8<br>Accept-Encoding: gzip, deflate<br>Accept-Language: zh-CN,zh;q=0.9<br><strong>Cache-Control: max-age=0</strong><br>Connection: keep-alive<br>Cookie: _ga=GA1.3.1095925235.1523974276; _gid=GA1.3.1216852923.1523974276<br>Host: <a href="http://www.firefox.com.cn" target="_blank" rel="noopener">www.firefox.com.cn</a><br><strong>If-Modified-Since: Thu, 29 Mar 2018 08:41:57 GMT</strong><br>Upgrade-Insecure-Requests: 1<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36  </p>
 </blockquote>
@@ -434,7 +565,7 @@
 <blockquote>
 <p>Firefox中的强制刷新：</p>
 </blockquote>
-<p><img src="okhttp-cache-02-06.png" alt="image"><br>可以看到，Firefox对待immutable的响应的刷新是从缓存中获取了数据，强制刷新是从网络获取了数据，遵守了RFC中的规定。<br>关于浏览器对待immutable的支持可以参考<a href="https://stackoverflow.com/questions/41936772/which-browsers-support-cache-control-immutable" target="_blank" rel="noopener">https://stackoverflow.com/questions/41936772/which-browsers-support-cache-control-immutable</a>和其下方的评论。<br>然而在OkHttp中，我们可以看到如果请求中有条件请求首部，是没有判断缓存的响应是不是immutable的，而是直接发送这个请求。或许是因为浏览器的刷新行为不适用于OkHttp中，而且OkHttp的贡献者也说OkHttp中没有强制刷新的概念<br>（此处可参考<a href="https://github.com/square/okhttp/issues/2878#issuecomment-381572317">https://github.com/square/okhttp/issues/2878#issuecomment-381572317</a>）。我想这应该是RFC的锅，它没有明确说明在缓存的响应是immutable的时候到底包含了那些首部的请求是要阻拦的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CacheControl requestCaching = request.cacheControl();</span><br><span class="line"><span class="keyword">if</span> (requestCaching.noCache() || hasConditions(request)) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> CacheStrategy(request, <span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CacheControl responseCaching = cacheResponse.cacheControl();</span><br><span class="line"><span class="keyword">if</span> (responseCaching.immutable()) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> CacheStrategy(<span class="keyword">null</span>, cacheResponse);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="okhttp-cache-02-06.png" alt="image"><br>可以看到，Firefox对待immutable的响应的刷新是从缓存中获取了数据，强制刷新是从网络获取了数据，遵守了RFC中的规定。<br>关于浏览器对待immutable的支持可以参考<a href="https://stackoverflow.com/questions/41936772/which-browsers-support-cache-control-immutable" target="_blank" rel="noopener">https://stackoverflow.com/questions/41936772/which-browsers-support-cache-control-immutable</a>和其下方的评论。<br>然而在OkHttp中，我们可以看到如果请求中有条件请求首部，是没有判断缓存的响应是不是immutable的，而是直接发送这个请求。或许是因为浏览器的刷新行为不适用于OkHttp中，而且OkHttp的贡献者也说OkHttp中没有强制刷新的概念（此处可参考<a href="https://github.com/square/okhttp/issues/2878#issuecomment-381572317">https://github.com/square/okhttp/issues/2878#issuecomment-381572317</a>）。我想这应该是RFC的锅，它没有明确说明在缓存的响应是immutable的时候到底包含了那些首部的请求是要阻拦的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CacheControl requestCaching = request.cacheControl();</span><br><span class="line"><span class="keyword">if</span> (requestCaching.noCache() || hasConditions(request)) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> CacheStrategy(request, <span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CacheControl responseCaching = cacheResponse.cacheControl();</span><br><span class="line"><span class="keyword">if</span> (responseCaching.immutable()) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> CacheStrategy(<span class="keyword">null</span>, cacheResponse);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>除此之外，OkHttp对待immutable还有一处与RFC不同就是OkHttp并没有先计算缓存的freshness lifetime。</p>
 <h3 id="新鲜度"><a href="#新鲜度" class="headerlink" title="新鲜度"></a>新鲜度</h3><p>在校验缓存的响应是否是immutable的之后，就是新鲜度计算的代码，这一块在RFC中也有计算公式，就不赘述了。这一块会在一定条件下对过期响应添加Warning首部，如上文所说。</p>
 <h2 id="第三部分-缓存的响应需要进一步验证才可以使用"><a href="#第三部分-缓存的响应需要进一步验证才可以使用" class="headerlink" title="第三部分 缓存的响应需要进一步验证才可以使用"></a>第三部分 缓存的响应需要进一步验证才可以使用</h2><p>第三部分的代码区域为：</p>
@@ -669,7 +800,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -720,7 +851,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

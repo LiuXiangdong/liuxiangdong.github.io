@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="这篇文章是基于3.10.0版本的OkHttp缓存在Android系统上的使用分析，如有错误或不恰当的地方，真诚希望大家指出。   这篇文章详述了CacheStrategy的功能，此类大部分的逻辑可参考RFC7234、RFC2616的缓存部分和RFC8246，也就是说此类是对于协议标准的实现，不涉及文件操作等底层细节，这篇文章的目的不在于教学，只是希望与大家一起探讨，因为毕竟我也有一些疑惑的地方">
+<meta name="description" content="这篇文章是基于3.10.0版本的OkHttp缓存在Android系统上的使用分析，如有错误或不恰当的地方，真诚希望大家指出   这篇文章详述了CacheStrategy的功能，此类大部分的逻辑可参考RFC7234、RFC2616的缓存部分和RFC8246，也就是说此类是对于协议标准的实现，不涉及文件操作等底层细节，这篇文章的目的不在于教学，只是希望与大家一起探讨，因为毕竟我也有一些疑惑的地方">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OkHttp中的缓存（二）——CacheStrategy">
 <meta property="og:url" content="https://github.com/LiuXiangdong/2018/04/17/okhttp-cache-02/index.html">
 <meta property="og:site_name" content="空谈误国 实干兴邦">
-<meta property="og:description" content="这篇文章是基于3.10.0版本的OkHttp缓存在Android系统上的使用分析，如有错误或不恰当的地方，真诚希望大家指出。   这篇文章详述了CacheStrategy的功能，此类大部分的逻辑可参考RFC7234、RFC2616的缓存部分和RFC8246，也就是说此类是对于协议标准的实现，不涉及文件操作等底层细节，这篇文章的目的不在于教学，只是希望与大家一起探讨，因为毕竟我也有一些疑惑的地方">
+<meta property="og:description" content="这篇文章是基于3.10.0版本的OkHttp缓存在Android系统上的使用分析，如有错误或不恰当的地方，真诚希望大家指出   这篇文章详述了CacheStrategy的功能，此类大部分的逻辑可参考RFC7234、RFC2616的缓存部分和RFC8246，也就是说此类是对于协议标准的实现，不涉及文件操作等底层细节，这篇文章的目的不在于教学，只是希望与大家一起探讨，因为毕竟我也有一些疑惑的地方">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://github.com/LiuXiangdong/2018/04/17/okhttp-cache-02/okhttp-cache-02-02.png">
 <meta property="og:image" content="https://github.com/LiuXiangdong/2018/04/17/okhttp-cache-02/okhttp-cache-02-01.png">
@@ -92,10 +92,10 @@
 <meta property="og:image" content="https://github.com/LiuXiangdong/2018/04/17/okhttp-cache-02/okhttp-cache-02-04.png">
 <meta property="og:image" content="https://github.com/LiuXiangdong/2018/04/17/okhttp-cache-02/okhttp-cache-02-05.png">
 <meta property="og:image" content="https://github.com/LiuXiangdong/2018/04/17/okhttp-cache-02/okhttp-cache-02-06.png">
-<meta property="og:updated_time" content="2018-04-18T15:58:36.434Z">
+<meta property="og:updated_time" content="2018-04-19T13:59:25.450Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OkHttp中的缓存（二）——CacheStrategy">
-<meta name="twitter:description" content="这篇文章是基于3.10.0版本的OkHttp缓存在Android系统上的使用分析，如有错误或不恰当的地方，真诚希望大家指出。   这篇文章详述了CacheStrategy的功能，此类大部分的逻辑可参考RFC7234、RFC2616的缓存部分和RFC8246，也就是说此类是对于协议标准的实现，不涉及文件操作等底层细节，这篇文章的目的不在于教学，只是希望与大家一起探讨，因为毕竟我也有一些疑惑的地方">
+<meta name="twitter:description" content="这篇文章是基于3.10.0版本的OkHttp缓存在Android系统上的使用分析，如有错误或不恰当的地方，真诚希望大家指出   这篇文章详述了CacheStrategy的功能，此类大部分的逻辑可参考RFC7234、RFC2616的缓存部分和RFC8246，也就是说此类是对于协议标准的实现，不涉及文件操作等底层细节，这篇文章的目的不在于教学，只是希望与大家一起探讨，因为毕竟我也有一些疑惑的地方">
 <meta name="twitter:image" content="https://github.com/LiuXiangdong/2018/04/17/okhttp-cache-02/okhttp-cache-02-02.png">
 
 
@@ -317,7 +317,7 @@
 
       
         <blockquote>
-<p>这篇文章是基于3.10.0版本的<a href="https://github.com/square/okhttp">OkHttp</a>缓存在Android系统上的使用分析，如有错误或不恰当的地方，真诚希望大家指出。</p>
+<p>这篇文章是基于3.10.0版本的<a href="https://github.com/square/okhttp">OkHttp</a>缓存在Android系统上的使用分析，如有错误或不恰当的地方，真诚希望大家指出</p>
 </blockquote>
 <blockquote>
 <p>这篇文章详述了CacheStrategy的功能，此类大部分的逻辑可参考<a href="https://tools.ietf.org/html/rfc7234" target="_blank" rel="noopener">RFC7234</a>、<a href="https://tools.ietf.org/html/rfc2616#section-13" target="_blank" rel="noopener">RFC2616的缓存部分</a>和<a href="https://tools.ietf.org/html/rfc8246" target="_blank" rel="noopener">RFC8246</a>，也就是说此类是对于协议标准的实现，不涉及文件操作等底层细节，这篇文章的目的不在于教学，只是希望与大家一起探讨，因为毕竟我也有一些疑惑的地方</p>
@@ -408,7 +408,7 @@
 <blockquote>
 <p>Clients SHOULD NOT issue a conditional request during the response’s freshness lifetime (e.g., upon a reload) unless explicitly overridden by the user (e.g., a force reload).</p>
 </blockquote>
-<p>在分析<strong>出入</strong>之前，还需要了解一下上句中<strong>reload</strong>和<strong>force reload</strong>到底是什么意思。RFC也没有具体说，这里我参考了Firefox和Chrome的行为。在Firefox和Chrome中，如果按F5是一个刷新操作，着我们都知道，而在这两个浏览器中按Ctrl+F5是一个强制刷新操作。<br>我们来看一下当进行这两个操作的时候两个浏览器发送的请求有什么不同：<br>我们分别在两个浏览器中请求<a href="http://www.firefox.com.cn/media/img/logos/firefox/logo-quantum.9c5e96634f92.png" target="_blank" rel="noopener">http://www.firefox.com.cn/media/img/logos/firefox/logo-quantum.9c5e96634f92.png</a>这个url的图片，然后两个浏览器会将此响应保存<br>在缓存中，然后在Chrome中按F5刷新，请求首部如下所示：</p>
+<p>在分析<strong>出入</strong>之前，还需要了解一下上句中<strong>reload</strong>和<strong>force reload</strong>到底是什么意思。RFC也没有具体说，这里我参考了Firefox和Chrome的行为。在Firefox和Chrome中，如果按F5是一个刷新操作，着我们都知道，而在这两个浏览器中按Ctrl+F5是一个强制刷新操作。<br>我们来看一下当进行这两个操作的时候两个浏览器发送的请求有什么不同：<br>我们分别在两个浏览器中请求<a href="http://www.firefox.com.cn/media/img/logos/firefox/logo-quantum.9c5e96634f92.png" target="_blank" rel="noopener">http://www.firefox.com.cn/media/img/logos/firefox/logo-quantum.9c5e96634f92.png</a>这个url的图片，然后两个浏览器会将此响应保存在缓存中，然后在Chrome中按F5刷新，请求首部如下所示：</p>
 <blockquote>
 <p>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,<em>/</em>;q=0.8<br>Accept-Encoding: gzip, deflate<br>Accept-Language: zh-CN,zh;q=0.9<br><strong>Cache-Control: max-age=0</strong><br>Connection: keep-alive<br>Cookie: _ga=GA1.3.1095925235.1523974276; _gid=GA1.3.1216852923.1523974276<br>Host: <a href="http://www.firefox.com.cn" target="_blank" rel="noopener">www.firefox.com.cn</a><br><strong>If-Modified-Since: Thu, 29 Mar 2018 08:41:57 GMT</strong><br>Upgrade-Insecure-Requests: 1<br>User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36  </p>
 </blockquote>
@@ -440,7 +440,7 @@
 <blockquote>
 <p>Firefox中的强制刷新：</p>
 </blockquote>
-<p><img src="okhttp-cache-02-06.png" alt="image"><br>可以看到，Firefox对待immutable的响应的刷新是从缓存中获取了数据，强制刷新是从网络获取了数据，遵守了RFC中的规定。<br>关于浏览器对待immutable的支持可以参考<a href="https://stackoverflow.com/questions/41936772/which-browsers-support-cache-control-immutable" target="_blank" rel="noopener">https://stackoverflow.com/questions/41936772/which-browsers-support-cache-control-immutable</a>和其下方的评论。<br>然而在OkHttp中，我们可以看到如果请求中有条件请求首部，是没有判断缓存的响应是不是immutable的，而是直接发送这个请求。或许是因为浏览器的刷新行为不适用于OkHttp中，而且OkHttp的贡献者也说OkHttp中没有强制刷新的概念<br>（此处可参考<a href="https://github.com/square/okhttp/issues/2878#issuecomment-381572317">https://github.com/square/okhttp/issues/2878#issuecomment-381572317</a>）。我想这应该是RFC的锅，它没有明确说明在缓存的响应是immutable的时候到底包含了那些首部的请求是要阻拦的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CacheControl requestCaching = request.cacheControl();</span><br><span class="line"><span class="keyword">if</span> (requestCaching.noCache() || hasConditions(request)) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> CacheStrategy(request, <span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CacheControl responseCaching = cacheResponse.cacheControl();</span><br><span class="line"><span class="keyword">if</span> (responseCaching.immutable()) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> CacheStrategy(<span class="keyword">null</span>, cacheResponse);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="okhttp-cache-02-06.png" alt="image"><br>可以看到，Firefox对待immutable的响应的刷新是从缓存中获取了数据，强制刷新是从网络获取了数据，遵守了RFC中的规定。<br>关于浏览器对待immutable的支持可以参考<a href="https://stackoverflow.com/questions/41936772/which-browsers-support-cache-control-immutable" target="_blank" rel="noopener">https://stackoverflow.com/questions/41936772/which-browsers-support-cache-control-immutable</a>和其下方的评论。<br>然而在OkHttp中，我们可以看到如果请求中有条件请求首部，是没有判断缓存的响应是不是immutable的，而是直接发送这个请求。或许是因为浏览器的刷新行为不适用于OkHttp中，而且OkHttp的贡献者也说OkHttp中没有强制刷新的概念（此处可参考<a href="https://github.com/square/okhttp/issues/2878#issuecomment-381572317">https://github.com/square/okhttp/issues/2878#issuecomment-381572317</a>）。我想这应该是RFC的锅，它没有明确说明在缓存的响应是immutable的时候到底包含了那些首部的请求是要阻拦的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CacheControl requestCaching = request.cacheControl();</span><br><span class="line"><span class="keyword">if</span> (requestCaching.noCache() || hasConditions(request)) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> CacheStrategy(request, <span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CacheControl responseCaching = cacheResponse.cacheControl();</span><br><span class="line"><span class="keyword">if</span> (responseCaching.immutable()) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> CacheStrategy(<span class="keyword">null</span>, cacheResponse);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>除此之外，OkHttp对待immutable还有一处与RFC不同就是OkHttp并没有先计算缓存的freshness lifetime。</p>
 <h3 id="新鲜度"><a href="#新鲜度" class="headerlink" title="新鲜度"></a>新鲜度</h3><p>在校验缓存的响应是否是immutable的之后，就是新鲜度计算的代码，这一块在RFC中也有计算公式，就不赘述了。这一块会在一定条件下对过期响应添加Warning首部，如上文所说。</p>
 <h2 id="第三部分-缓存的响应需要进一步验证才可以使用"><a href="#第三部分-缓存的响应需要进一步验证才可以使用" class="headerlink" title="第三部分 缓存的响应需要进一步验证才可以使用"></a>第三部分 缓存的响应需要进一步验证才可以使用</h2><p>第三部分的代码区域为：</p>
@@ -487,6 +487,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/24/android-launcher/" rel="prev" title="安卓启动器图标">
+                安卓启动器图标 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -563,7 +567,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -630,7 +634,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
